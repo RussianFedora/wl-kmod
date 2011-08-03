@@ -6,19 +6,20 @@
 #define buildforkernels newest
 
 Name:		wl-kmod
-Version:	5.60.48.36
+Version:	5.100.82.38
 Release:	2%{?dist}.1.R
 Summary:	Kernel module for broadcom wireless devices
 Group:		System Environment/Kernel
 License:	Redistributable, no modification permitted
 URL:		http://www.broadcom.com/support/802.11/linux_sta.php
-Source0:	hybrid-portsrc-x86_32-v5.60.48.36.tar.gz
-Source1:	hybrid-portsrc-x86_64-v5.60.48.36.tar.gz
+Source0:	http://www.broadcom.com/docs/linux_sta/hybrid-portsrc_x86_32-v5_100_82_38.tar.gz
+Source1:	http://www.broadcom.com/docs/linux_sta/hybrid-portsrc_x86_64-v5_100_82_38.tar.gz
 Source11:	broadcom-wl-kmodtool-excludekernel-filterfile
 Patch0:         broadcom-wl-5.60.48.36-license.patch
-Patch1:		broadcom-wl-5.60.48.36-2.6.33-kernel.patch
-Patch2:		broadcom-wl-5.60.48.36-multicast-kernel.patch
+#Patch1:		broadcom-wl-5.60.48.36-2.6.33-kernel.patch
+#Patch2:		broadcom-wl-5.60.48.36-multicast-kernel.patch
 Patch3:		broadcom-wl-5.60.48.36-debug-lockdep-rcu-enabled.patch
+Patch4:		5_100_82_38.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	%{_bindir}/kmodtool
@@ -56,9 +57,10 @@ pushd %{name}-%{version}-src
  tar xzf %{SOURCE1}
 %endif
 %patch0 -p1 -b .license
-%patch1 -p0 -b .kernel
-%patch2 -p0 -b .multicast
+#%patch1 -p0 -b .kernel
+#%patch2 -p0 -b .multicast
 %patch3 -p0 -b .lockdep
+%patch4 -p0 -b .broadcom
 popd
 
 for kernel_version in %{?kernel_versions} ; do

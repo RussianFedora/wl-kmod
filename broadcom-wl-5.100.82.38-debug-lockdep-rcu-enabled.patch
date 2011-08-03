@@ -1,0 +1,15 @@
+diff -uNdr hybrid-portsrc_x86_32-v5_100_82_38.orig/src/wl/sys/wl_linux.c hybrid-portsrc_x86_32-v5_100_82_38/src/wl/sys/wl_linux.c
+--- hybrid-portsrc_x86_32-v5_100_82_38.orig/src/wl/sys/wl_linux.c	2010-12-15 04:58:07.000000000 +0300
++++ hybrid-portsrc_x86_32-v5_100_82_38/src/wl/sys/wl_linux.c	2011-08-03 14:09:12.939380494 +0400
+@@ -378,6 +378,11 @@
+ #endif
+ }
+ 
++int debug_lockdep_rcu_enabled(void)
++{
++    return 1;
++}
++
+ static wl_info_t *
+ wl_attach(uint16 vendor, uint16 device, ulong regs, uint bustype, void *btparam, uint irq)
+ {
